@@ -4,6 +4,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import org.json.simple.parser.ParseException;
@@ -11,18 +12,29 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
+        LocalDate date = LocalDate.now();
+        LocalTime time = LocalTime.now();
+
+        DateTimeFormatter formatterD = DateTimeFormatter.ofPattern("yyyyMMdd");  //추출한 날짜를 yyyyMMdd 형식으로 포맷팅
+        DateTimeFormatter formatterT = DateTimeFormatter.ofPattern("HHmmss");   //현재시각 추출
+        String formatedDate = date.format(formatterD);   //포맷 적용
+        String formatedTime = time.format(formatterT);
 
         String apiUrl = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst";
         // 홈페이지에서 받은 키
         String serviceKey = "8cfcf016d3df4e6d3e13bd8a5dcc1a95d8fc404c96c5c2fe3c4ffca9fe801390";
         String nx = "60";    //위도
         String ny = "127";    //경도 해당 좌표는 상명대학교 종로구 홍지동 좌표임
-        String baseDate = "20251105";    //조회하고싶은 날짜
+        String baseDate = formatedDate;    //조회하고싶은 날짜
         String baseTime = "1100";    //API 제공 시간을 입력하면 됨
         String type = "json";    //타입 xml, json 등등 ..
-        String numOfRows = "150";    //한 페이지 결과 수
+        String numOfRows = "153";    //한 페이지 결과 수
 
         //전날 23시 부터 153개의 데이터를 조회하면 오늘과 내일의 날씨를 알 수 있음
 
@@ -136,3 +148,5 @@ public class Main {
 
     }
 }
+
+
