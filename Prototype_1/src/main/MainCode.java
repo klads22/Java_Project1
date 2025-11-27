@@ -30,9 +30,22 @@ public class MainCode {
 		//System.out.println("현재 온도 가중치: " + temp);
 		//System.out.println("현재 온도: " + currWeatherStatus.currTemp);
 		//System.out.println("현재 미세먼지 가중치: " + currDust);
-		System.out.println("미세먼지: " + (int)currDustStatus.currDust + "(" + dust.DustLevel + ")");
 		//System.out.println("현재 자외선 가중치: " + currUV);
-		System.out.println("자외선지수: " + currUVStatus.currUV + "(" + UV.UVLevel + ")");
+		System.out.println(" 시각  |  자외선지수 | ");
+		System.out.println("─────────────────────");
+
+		//System.out.println(" 00:00 |	 " + currUVStatus.currUV + "(" + UV.UVLevel + ")");
+		//System.out.println(" 03:00 |	 " + currUVStatus.currUV03 + "(" + UV.UVLevel + ")");
+		System.out.println(" 06:00 |	 " + currUVStatus.currUV06 + "(" + UV.UVLevel + ")");
+		System.out.println(" 09:00 |	 " + currUVStatus.currUV09 + "(" + UV.UVLevel + ")");
+		System.out.println(" 12:00 |	 " + currUVStatus.currUV12 + "(" + UV.UVLevel + ")");
+		System.out.println(" 15:00 |	 " + currUVStatus.currUV15 + "(" + UV.UVLevel + ")");
+		System.out.println(" 18:00 |	 " + currUVStatus.currUV18 + "(" + UV.UVLevel + ")");
+		System.out.println(" 21:00 |	 " + currUVStatus.currUV21 + "(" + UV.UVLevel + ")");
+		System.out.println("─────────────────────");
+
+		System.out.println("미세먼지: " + (int)currDustStatus.currDust + "(" + dust.DustLevel + ")");
+
 		int totalScore = (int)temp + (int)currDust + currUV;
 		System.out.println("===============================");
 		Activity.RecommendAct(totalScore);

@@ -17,7 +17,14 @@ import org.json.simple.parser.ParseException;
 public class GetUVAPI {
 	
 	public static int currUV;
-	
+    public static int currUV03;
+    public static int currUV06;
+    public static int currUV09;
+    public static int currUV12;
+    public static int currUV15;
+    public static int currUV18;
+    public static int currUV21;
+
 	public static void getUvIndexData() throws IOException, ParseException {
         String baseUrl = "https://apihub.kma.go.kr/api/typ02/openApi/LivingWthrIdxServiceV3/getUVIdxV3";
         String pageNo = "1";
@@ -29,10 +36,6 @@ public class GetUVAPI {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHH");
         String time = now.format(formatter);
         String authKey = "-eWo4MAxRhqlqODAMdYaDQ";
-        
-        int hour = now.getHour();
-        int hValue = (hour/3)*3;
-        String hKey = String.format("h%02d", hValue);
 
         String urlString = String.format("%s?pageNo=%s&numOfRows=%s&dataType=%s&areaNo=%s&time=%s&authKey=%s",
                 baseUrl, pageNo, numOfRows, dataType, areaNo, time, authKey);
@@ -86,10 +89,25 @@ public class GetUVAPI {
                     JSONObject item = (JSONObject) itemObj;
                     String areaCode = (String) item.get("areaNo");
                     String date = (String) item.get("date");
-                    String uvIndex00 = (String) item.get(hKey);
+                    String uvIndex00 = (String) item.get("h0");
+                    String uvIndex03 = (String) item.get("h3");
+                    String uvIndex06 = (String) item.get("h6");
+                    String uvIndex09 = (String) item.get("h9");
+                    String uvIndex12 = (String) item.get("h12");
+                    String uvIndex15 = (String) item.get("h15");
+                    String uvIndex18 = (String) item.get("h18");
+                    String uvIndex21 = (String) item.get("h21");
 
                     //System.out.println("지역 코드: " + areaCode + ", 날짜: " + date + ", 15시 자외선 지수: " + uvIndex00);
                     currUV = Integer.parseInt(uvIndex00);
+                    currUV03 = Integer.parseInt(uvIndex03);
+                    currUV06 = Integer.parseInt(uvIndex06);
+                    currUV09 = Integer.parseInt(uvIndex09);
+                    currUV12 = Integer.parseInt(uvIndex12);
+                    currUV15 = Integer.parseInt(uvIndex15);
+                    currUV18 = Integer.parseInt(uvIndex18);
+                    currUV21 = Integer.parseInt(uvIndex21);
+
                 }
             } else {
                 System.out.println("API 응답에 유효한 자외선 지수 데이터(item)가 없습니다.");
