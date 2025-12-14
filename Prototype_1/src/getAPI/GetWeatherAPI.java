@@ -45,6 +45,8 @@ public class GetWeatherAPI {
         String nx = "60";    //위도
         String ny = "127";    //경도 해당 좌표는 상명대학교 종로구 홍지동 좌표임
         String baseDate = formatedDate;    //조회하고싶은 날짜
+        //String baseDate = "20251213";    //조회하고싶은 날짜
+
         String baseTime = "0500";    //API 제공 시간을 입력하면 됨
         String type = "json";    //타입 xml, json 등등 ..
         String numOfRows = "250";    //한 페이지 결과 수
@@ -153,6 +155,9 @@ public class GetWeatherAPI {
                 if (category.equals("PCP")) {
                     valueMap.put("PCP", fcstValue);
                 }
+                if (category.equals("POP")) {
+                    valueMap.put("POP", fcstValue);
+                }
 
             }
             if (category.equals("TMX")) {
@@ -181,12 +186,13 @@ public class GetWeatherAPI {
             String currentWsdStatus = values.getOrDefault("WSD", "-");
             String currentRehStatus = values.getOrDefault("REH", "-");
             String currentPcpStatus = values.getOrDefault("PCP", "N/A");
+            String currentPopStatus = values.getOrDefault("POP", "N/A");
             // 시간 포맷팅
             String formattedTimeStr = timeKey.substring(0, 2) + ":" + timeKey.substring(2);
 
 
-            System.out.printf("%s  | %7s | %-12s | %12s | %7s | %-12s | %-6s\n",
-                    formattedTimeStr, currentTemperature, currentSkyStatus, currentWsdStatus, currentRehStatus, currentPtyStatus, currentPcpStatus);
+            System.out.printf("%s  | %7s | %-12s | %12s | %7s | %-12s(%s%%) | %-6s\n",
+                    formattedTimeStr, currentTemperature, currentSkyStatus, currentWsdStatus, currentRehStatus, currentPtyStatus, currentPopStatus, currentPcpStatus);
 
             currTemp = Double.parseDouble(currentTemperature);
             currWsd = Double.parseDouble(currentWsdStatus);
