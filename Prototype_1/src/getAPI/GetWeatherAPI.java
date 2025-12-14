@@ -27,6 +27,9 @@ public class GetWeatherAPI {
 	public static double currSky;
 	public static double currPty;
 	public static double currWsd;
+    public static double currPcp;
+    public static double maxTemp;
+    public static double minTemp;
 
     private static final String[] TARGET_TIMES = {"0600", "0900", "1200", "1500", "1800", "2100"};
 
@@ -112,6 +115,7 @@ public class GetWeatherAPI {
                 "4", "소나기"
         );
 
+
         //Tree맵을 이용해서 시간 순서대로 정렬
         Map<String, Map<String, String>> weatherTime = new TreeMap<>();
 
@@ -143,13 +147,28 @@ public class GetWeatherAPI {
                 if (category.equals("WSD")) {
                     valueMap.put("WSD", fcstValue);
                 }
+                if (category.equals("REH")) {
+                    valueMap.put("REH", fcstValue);
+                }
+                if (category.equals("PCP")) {
+                    valueMap.put("PCP", fcstValue);
+                }
+
+            }
+            if (category.equals("TMX")) {
+                maxTemp = Double.parseDouble(fcstValue);
+            }
+
+            if (category.equals("TMN")) {
+                minTemp = Double.parseDouble(fcstValue);
             }
         }
         System.out.println("\n===== 종로구 홍지동 날씨 예보 (06:00부터 3시간 간격) =====");
         System.out.printf("기준 날짜: %s, 기준 예보시각: %s\n", baseDate, baseTime);
-        System.out.println("──────────────────────────────────────────────────────────────────");
-        System.out.println(" 시각  |  온도(℃) |    하늘상태    |  강수확률(형태)  |  풍속(m/s)");
-        System.out.println("──────────────────────────────────────────────────────────────────");
+
+        System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
+        System.out.println(" 시각  |  온도(℃) |    하늘상태    |  풍속(m/s)  |   습도   |  강수확률(형태)  |  강수량");
+        System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 
         // TreeMap을 순회하며 결과를 출력
         for (String timeKey : weatherTime.keySet()) {
@@ -160,13 +179,14 @@ public class GetWeatherAPI {
             String currentSkyStatus = values.getOrDefault("SKY", "N/A");
             String currentPtyStatus = values.getOrDefault("PTY", "N/A");
             String currentWsdStatus = values.getOrDefault("WSD", "-");
-
+            String currentRehStatus = values.getOrDefault("REH", "-");
+            String currentPcpStatus = values.getOrDefault("PCP", "N/A");
             // 시간 포맷팅
             String formattedTimeStr = timeKey.substring(0, 2) + ":" + timeKey.substring(2);
 
 
-            System.out.printf(" %s | %6s   | %-12s | %-12s | %5s | %s\n",
-                    formattedTimeStr, currentTemperature, currentSkyStatus, currentPtyStatus, currentWsdStatus);
+            System.out.printf("%s  | %7s | %-12s | %12s | %7s | %-12s | %-6s\n",
+                    formattedTimeStr, currentTemperature, currentSkyStatus, currentWsdStatus, currentRehStatus, currentPtyStatus, currentPcpStatus);
 
             currTemp = Double.parseDouble(currentTemperature);
             currWsd = Double.parseDouble(currentWsdStatus);
