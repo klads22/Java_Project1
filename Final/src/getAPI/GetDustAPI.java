@@ -24,7 +24,6 @@ public class GetDustAPI {
         urlBuilder.append("/" + URLEncoder.encode("RealtimeCityAir","UTF-8")); /*서비스명 (대소문자 구분 필수입니다.)*/
         urlBuilder.append("/" + URLEncoder.encode("1","UTF-8")); /*요청시작위치 (sample인증키 사용시 5이내 숫자)*/
         urlBuilder.append("/" + URLEncoder.encode("5","UTF-8")); /*요청종료위치(sample인증키 사용시 5이상 숫자 선택 안 됨)*/
-        // 상위 5개는 필수적으로 순서바꾸지 않고 호출해야 합니다.
 
         // 서비스별 추가 요청 인자이며 자세한 내용은 각 서비스별 '요청인자'부분에 자세히 나와 있습니다.
         urlBuilder.append("/" + URLEncoder.encode("도심권","UTF-8")); /* 서비스별 추가 요청인자들*/
@@ -56,44 +55,32 @@ public class GetDustAPI {
         // 1. JSONParser 객체 생성
         JSONParser parser = new JSONParser();
 
-        // sb.toString()에 담긴 JSON 문자열을 파싱하여 최상위 객체(Object)로 변환
+        // sb.toString()에 담긴 JSON 문자열을 파싱하여 최상위 객체로 변환
         JSONObject jsonObject = (JSONObject) parser.parse(sb.toString());
-
-        // 2. 원하는 데이터가 있는 계층으로 접근 (API 응답 구조 확인 필수!)
-        // 서울시 대기정보 API의 JSON 구조: { "RealtimeCityAir": { "row": [ {...}, {...} ] } }
 
         // 2-1. "RealtimeCityAir" 키로 접근하여 두 번째 계층의 JSONObject를 얻습니다.
         JSONObject realtimeCityAir = (JSONObject) jsonObject.get("RealtimeCityAir");
 
-        // 2-2. "row" 키로 접근하여 실제 데이터 목록이 담긴 JSONArray를 얻습니다.
-        // "row"는 측정소별 데이터 객체(JSONObject)들의 리스트입니다.
         JSONArray rowArray = (JSONArray) realtimeCityAir.get("row");
 
-        // 3. 배열(rowArray)을 순회하며 각 측정소의 데이터 추출
-        //System.out.println("--- 추출된 실시간 대기 정보 ---");
+
 
         for (Object item : rowArray) {
             JSONObject dustData = (JSONObject) item;
-
-            // 1단계: 추출하고자 하는 Object를 가져옵니다.
             Object pmObj = dustData.get("PM");
             String msrstnNm = (String) dustData.get("MSRSTN_NM");
 
-            // 2단계: Null 체크 및 안전한 변환
+            //Null 체크 및 안전한 변환
             String pm10;
             if (pmObj != null) {
                 try {
-                    // Object를 String으로 변환 후, Double로 파싱합니다.
-                    // 이 방식은 값이 Long(정수)이든 Double(실수)이든 모두 처리할 수 있습니다.
                     double doubleValue = Double.parseDouble(pmObj.toString());
                     currDust = doubleValue;
                     pm10 = Double.toString(doubleValue);
                 } catch (NumberFormatException e) {
-                    // 만약 "데이터없음" 같은 문자열이 들어오면 'N/A'로 처리합니다.
                     pm10 = "N/A";
                 }
             } else {
-                // 값이 null이면 'N/A'로 처리합니다.
                 pm10 = "N/A";
             }
 

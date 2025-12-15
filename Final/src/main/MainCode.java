@@ -40,13 +40,15 @@ public class MainCode {
 		if (monthValue >= 5 || monthValue <= 9)//여름 체감온도(5월~9월)
 			for(int idx = 0; idx < 6; idx++ )
 			{
-				temps[idx] = temperature.CalcSummer(GetWeatherAPI.tempResults[idx], GetWeatherAPI.humidResults[idx]);
+				temps[idx] = temperature.CalcSummer
+						(GetWeatherAPI.tempResults[idx], GetWeatherAPI.humidResults[idx]);
 			}
 			
 		else //겨울 체감온도(10월~익년 4월)
 			for(int idx = 0; idx < 6; idx++ )
 			{
-				temps[idx] = temperature.CalcWinter(GetWeatherAPI.tempResults[idx],GetWeatherAPI.windResults[idx]);
+				temps[idx] = temperature.CalcWinter
+						(GetWeatherAPI.tempResults[idx],GetWeatherAPI.windResults[idx]);
 			} // 겨울 체감온도식을 적용한 체감온도를 temps[]에 0(06시)부터 5(21시)에 각각 가중치 저장
 		
 		double currDust = dust.Calc_Dust(currDustStatus.currDust);
