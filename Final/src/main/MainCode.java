@@ -40,7 +40,7 @@ public class MainCode {
 		if (monthValue >= 5 || monthValue <= 9)//여름 체감온도(5월~9월)
 			for(int idx = 0; idx < 6; idx++ )
 			{
-				temp = temperature.CalcSummer(GetWeatherAPI.tempResults[idx], GetWeatherAPI.humidResults[idx]);
+				temps[idx] = temperature.CalcSummer(GetWeatherAPI.tempResults[idx], GetWeatherAPI.humidResults[idx]);
 			}
 			
 		else //겨울 체감온도(10월~익년 4월)
