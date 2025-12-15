@@ -84,7 +84,6 @@ public class GetDustAPI {
                 pm10 = "N/A";
             }
 
-            
         }
         
     }
