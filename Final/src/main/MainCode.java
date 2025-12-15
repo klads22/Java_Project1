@@ -53,23 +53,23 @@ public class MainCode {
 		int currUV = UV.Calc_UV(currUVStatus.currUV);
 		
 		System.out.println(" 시각   |  자외선지수 | ");
-		System.out.println("─────────────────────");
+		System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println(" 06:00 |  " + currUVStatus.currUV06 + "(" + UV.UVLevel + ")");
 		System.out.println(" 09:00 |  " + currUVStatus.currUV09 + "(" + UV.UVLevel + ")");
 		System.out.println(" 12:00 |  " + currUVStatus.currUV12 + "(" + UV.UVLevel + ")");
 		System.out.println(" 15:00 |  " + currUVStatus.currUV15 + "(" + UV.UVLevel + ")");
 		System.out.println(" 18:00 |  " + currUVStatus.currUV18 + "(" + UV.UVLevel + ")");
 		System.out.println(" 21:00 |  " + currUVStatus.currUV21 + "(" + UV.UVLevel + ")");
-		System.out.println("─────────────────────");
+		System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 		System.out.println("미세먼지: " + (int)currDustStatus.currDust + "(" + dust.DustLevel + ")");
-		System.out.println("===============================");
+		System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 		
 		
 		quit: while(true)
 		{
 			System.out.println("조회하고 싶은 시간의 번호를 입력해주세요");
-			System.out.println("조회 가능 시간: 0번.종료, 1번.06시, 2번.09시, 3번.12시, 4번.15시, 5번.18시, 6번.21시");
-			System.out.print("번호: ");
+			System.out.println("조회 가능 시간: 0번: 종료 | 1번: 06시 | 2번: 09시 | 3번: 12시 | 4번: 15시 | 5번: 18시 | 6번: 21시");
+			System.out.print("입력: ");
 			
 			
 			int choiceValue = Integer.parseInt(scanner.nextLine());
@@ -80,18 +80,24 @@ public class MainCode {
 				case 0:
 					break quit;
 				case 1: // 1번(06시) 선택
-					totalScore = (int)temps[0] + (int)currDustStatus.currDust + currUVStatus.currUV06 + Rain.Calc_Rain(GetWeatherAPI.PCPResults[0]);;
+					totalScore = (int)temps[0] + (int)currDustStatus.currDust + currUVStatus.currUV06
+							+ Rain.Calc_Rain(GetWeatherAPI.PCPResults[0]);;
 					Activity.RecommendAct(totalScore);
 					recommendCloth.Cloth(temps[0]);
-					Items.GetItems((int)currDustStatus.currDust, currUVStatus.currUV06, GetWeatherAPI.popResults[0] ,GetWeatherAPI.PCPResults[0]);
-					Warning.Warning((int)currDustStatus.currDust, currUVStatus.currUV06, GetWeatherAPI.maxTemp, GetWeatherAPI.minTemp);
+					Items.GetItems((int)currDustStatus.currDust, currUVStatus.currUV06,
+							GetWeatherAPI.popResults[0] ,GetWeatherAPI.PCPResults[0]);
+					Warning.Warning((int)currDustStatus.currDust, currUVStatus.currUV06,
+							GetWeatherAPI.maxTemp, GetWeatherAPI.minTemp);
 					break;
 				case 2: // 2번(09시) 선택
-					totalScore = (int)temps[1] + (int)currDustStatus.currDust + currUVStatus.currUV09 + Rain.Calc_Rain(GetWeatherAPI.PCPResults[1]);
+					totalScore = (int)temps[1] + (int)currDustStatus.currDust + currUVStatus.currUV09
+							+ Rain.Calc_Rain(GetWeatherAPI.PCPResults[1]);
 					Activity.RecommendAct(totalScore);
 					recommendCloth.Cloth(temps[1]);
-					Items.GetItems((int)currDustStatus.currDust, currUVStatus.currUV09, GetWeatherAPI.popResults[1] ,GetWeatherAPI.PCPResults[1]);
-					Warning.Warning((int)currDustStatus.currDust, currUVStatus.currUV09, GetWeatherAPI.maxTemp, GetWeatherAPI.minTemp);
+					Items.GetItems((int)currDustStatus.currDust, currUVStatus.currUV09,
+							GetWeatherAPI.popResults[1] ,GetWeatherAPI.PCPResults[1]);
+					Warning.Warning((int)currDustStatus.currDust, currUVStatus.currUV09,
+							GetWeatherAPI.maxTemp, GetWeatherAPI.minTemp);
 					break;
 				case 3: // 3번(12시) 선택
 					totalScore = (int)temps[2] + (int)currDustStatus.currDust + currUVStatus.currUV12 + Rain.Calc_Rain(GetWeatherAPI.PCPResults[2]);
@@ -125,7 +131,7 @@ public class MainCode {
 					System.out.println("다시 입력해주세요.");
 					break;
 			}
-			System.out.println("===============================");
+			System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 		}
 	}
 

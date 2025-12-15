@@ -16,3 +16,4 @@ public class CalculateRain {
 			return 80;
 	}
 }
+

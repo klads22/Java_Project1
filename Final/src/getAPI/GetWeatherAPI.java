@@ -52,6 +52,7 @@ public class GetWeatherAPI {
         String serviceKey = "8cfcf016d3df4e6d3e13bd8a5dcc1a95d8fc404c96c5c2fe3c4ffca9fe801390"; // 인증키
         String nx = "60";    //위도
         String ny = "127";    //경도 해당 좌표는 상명대학교 종로구 홍지동 좌표임
+        //String baseDate = "20251213";    /테스트케이스
         String baseDate = formatedDate;    //조회하고싶은 날짜
         String baseTime = "0500";    //API 제공 시간을 입력하면 됨
         String type = "json";    //타입 xml, json 등등 ..
@@ -198,8 +199,9 @@ public class GetWeatherAPI {
             // 시간 포맷팅
             String formattedTimeStr = timeKey.substring(0, 2) + ":" + timeKey.substring(2);
 
-            System.out.printf("%s  | %7s | %-12s | %12s | %7s | %-5s(%s%%) | %-6s\n",
-                    formattedTimeStr, currentTemperature, currentSkyStatus, currentWsdStatus, currentRehStatus, currentPtyStatus, currentPopStatus, currentPcpStatus);
+            System.out.printf("%s   | %-7s  | %-12s | %-10s | %-9s | %-7s(%s%%)   | %-14s\n",
+                    formattedTimeStr, currentTemperature, currentSkyStatus, currentWsdStatus,
+                    currentRehStatus, currentPtyStatus, currentPopStatus, currentPcpStatus);
             tempResults[idx] = Double.parseDouble(currentTemperature); //온도
             windResults[idx] = Double.parseDouble(currentWsdStatus); //풍속
             humidResults[idx] = Double.parseDouble(currentRehStatus);

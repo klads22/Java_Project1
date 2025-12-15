@@ -26,7 +26,7 @@ public class RecommendItems {
 		if (hasRecommendation)
 		{
 			String result = String.join(", ", recommendItems);
-			System.out.println("추천 물품은 " + result + "입니다.");
+			System.out.println("지참해야할 추천 물품은 " + result + "입니다.");
 		}
 	}
 	

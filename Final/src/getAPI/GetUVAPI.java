@@ -32,7 +32,6 @@ public class GetUVAPI {
         String numOfRows = "10";
         String dataType = "JSON"; // XML 대신 JSON으로 요청
         String areaNo = "1111000000"; // 종로구 홍지문 코드
-        //String time = "2025112218"; //
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHH");
         String time = now.format(formatter);
@@ -68,19 +67,12 @@ public class GetUVAPI {
                 response.append(inputLine);
             }
 
-            // 3. JSON 문자열 파싱
-            //System.out.println("\n--- API 응답 (JSON 문자열) ---");
-            //System.out.println(response.toString());
-
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(response.toString());
 
             JSONObject apiResponse = (JSONObject) jsonObject.get("response");
             JSONObject body = (JSONObject) apiResponse.get("body");
-            /*if (body == null) {
-                System.out.println("API body is null");
-                return;
-            }*/
+
             JSONObject items = (JSONObject) body.get("items");
             JSONArray itemArray = (JSONArray) items.get("item");
 

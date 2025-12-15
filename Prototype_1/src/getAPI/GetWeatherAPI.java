@@ -44,13 +44,12 @@ public class GetWeatherAPI {
         String serviceKey = "8cfcf016d3df4e6d3e13bd8a5dcc1a95d8fc404c96c5c2fe3c4ffca9fe801390"; // 인증키
         String nx = "60";    //위도
         String ny = "127";    //경도 해당 좌표는 상명대학교 종로구 홍지동 좌표임
-        String baseDate = formatedDate;    //조회하고싶은 날짜
-        //String baseDate = "20251213";    //조회하고싶은 날짜
+        //String baseDate = formatedDate;    //조회하고싶은 날짜
+        String baseDate = "20251213";    //테스트케이스 날짜
 
         String baseTime = "0500";    //API 제공 시간을 입력하면 됨
         String type = "json";    //타입 xml, json 등등 ..
         String numOfRows = "250";    //한 페이지 결과 수
-
         //전날 23시 부터 153개의 데이터를 조회하면 오늘과 내일의 날씨를 알 수 있음
 
 
@@ -172,7 +171,7 @@ public class GetWeatherAPI {
         System.out.printf("기준 날짜: %s, 기준 예보시각: %s\n", baseDate, baseTime);
 
         System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
-        System.out.println(" 시각  |  온도(℃) |    하늘상태    |  풍속(m/s)  |   습도   |  강수확률(형태)  |  강수량");
+        System.out.println(" 시각  |  온도(℃) |    하늘상태    |  풍속(m/s)  |   습도   |  눈 / 비(확률)  |  강수량");
         System.out.println("────────────────────────────────────────────────────────────────────────────────────────");
 
         // TreeMap을 순회하며 결과를 출력

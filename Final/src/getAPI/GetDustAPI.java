@@ -97,14 +97,6 @@ public class GetDustAPI {
                 pm10 = "N/A";
             }
 
-            // 5. 추출된 데이터 출력
-            /*System.out.println("------------------------------------");
-            System.out.println("측정소: " + msrstnNm);
-            System.out.println("미세먼지(PM10): " + pm10 + " µg/m³");
-            // ... (다른 항목도 같은 방식으로 처리하면 됩니다.)
-            System.out.println("------------------------------------");*/
-            
-            
             
         }
         
